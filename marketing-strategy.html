@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Marketing Strategy — Big Splash</title>
+  <meta name="description" content="Content planning, paid advertising, audience targeting, and performance measurement. The roadmap behind marketing work that ships and moves the business.">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Marketing Strategy — Big Splash">
+  <meta property="og:description" content="The roadmap behind work that ships. Strategy built for service businesses.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="assets/images/favicon.png">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <style>
+    body {
+      background-color: #131318;
+      color: #ddd8ce;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      overflow-x: hidden;
+    }
+    .font-anton { font-family: 'Anton', sans-serif; }
+    .font-jetbrains { font-family: 'JetBrains Mono', monospace; }
+
+    /* Film grain texture */
+    .abyssal-grain { position: relative; }
+    .abyssal-grain::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.03;
+      pointer-events: none;
+      z-index: 1;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    /* Cream glow — page accent */
+    .text-glow-cream {
+      text-shadow: 0 0 60px rgba(221, 216, 206, 0.45), 0 0 120px rgba(221, 216, 206, 0.25);
+    }
+
+    /* Bloom hover on buttons (cream version) */
+    .bloom-hover-cream:hover {
+      box-shadow: 0 0 50px rgba(221, 216, 206, 0.3);
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Navbar scroll state */
+    nav.scrolled {
+      background: rgba(19, 19, 24, 0.9);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+
+    /* Mobile menu */
+    #mobile-menu.open { opacity: 1; pointer-events: auto; }
+    body.menu-open #bar1 { transform: rotate(45deg) translateY(5px) translateX(4px); }
+    body.menu-open #bar2 { opacity: 0; }
+    body.menu-open #bar3 { width: 24px; transform: rotate(-45deg) translateY(-5px) translateX(4px); }
+
+    /* Service band */
+    .service-band { transition: background-color 0.5s, border-color 0.5s; }
+
+    /* Custom scrollbar (cream-tinted) */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #131318; }
+    ::-webkit-scrollbar-thumb { background: rgba(221, 216, 206, 0.18); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(221, 216, 206, 0.35); }
+
+    /* Selection */
+    ::selection { background: rgba(221, 216, 206, 0.35); color: #131318; }
+
+    /* Video in-place playback (cream tint) */
+    body.video-playing { overflow: hidden; }
+    #video-player {
+      position: fixed;
+      z-index: 99999;
+      background: #000;
+      box-shadow: 0 0 120px rgba(221, 216, 206, 0.12), 0 8px 80px rgba(0,0,0,0.9);
+      border: 1px solid rgba(221, 216, 206, 0.12);
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.97);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    #video-player.vp-active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    #video-player video {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    #video-player .vp-close {
+      position: absolute;
+      top: -18px;
+      right: -18px;
+      z-index: 10;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(19,19,24,0.95);
+      color: #e4e1e9;
+      border: 1px solid rgba(221, 216, 206, 0.25);
+      font-size: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    #video-player .vp-close:hover {
+      background: rgba(221, 216, 206, 0.9);
+      color: #131318;
+    }
+
+    /* Process step cards */
+    .process-step {
+      position: relative;
+      transition: border-color 0.5s, background-color 0.5s;
+    }
+    .process-step:hover {
+      border-color: rgba(221, 216, 206, 0.4);
+      background-color: #1f1f25;
+    }
+  </style>
+
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary": "#eff88b",
+            "secondary": "#6a9686",
+            "tertiary": "#ddd8ce",
+            "on-primary": "#2f3300",
+            "on-surface": "#e4e1e9",
+            "background": "#131318",
+            "surface": "#131318",
+            "surface-dim": "#0e0e13",
+            "surface-container": "#1f1f25",
+            "surface-container-low": "#1b1b20",
+            "surface-container-high": "#2a292f",
+            "surface-container-highest": "#35343a",
+            "outline": "#92927f",
+            "outline-variant": "#474838",
+          },
+          fontFamily: {
+            "headline": ["Anton"],
+            "body": ["Inter"],
+            "label": ["JetBrains Mono"],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body class="bg-background selection:bg-tertiary selection:text-on-primary">
+
+  <!-- ========== NAVIGATION ========== -->
+  <nav id="navbar" class="fixed top-0 w-full flex justify-between items-center px-6 md:px-12 py-6 md:py-8 z-50 bg-transparent transition-all duration-500">
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center gap-1" aria-label="Big Splash Home">
+      <svg class="h-6 md:h-7 w-auto" viewBox="0 0 655 191" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M170.856 172.036C170.856 175.982 169.691 179.3 167.449 182.08C162.786 187.729 153.191 190.778 136.96 190.778H133.014C125.481 190.778 119.473 190.42 114.9 189.433C105.933 187.64 102.077 184.142 102.077 178.852C102.077 172.037 107.009 168.45 120.101 167.373C108.085 167.284 101.808 165.67 101.808 157.958C101.808 151.95 106.56 147.376 119.742 146.928C109.789 145.493 104.318 141.727 104.318 132.849C104.318 121.909 114.183 114.825 135.166 114.825H137.229C140.726 114.825 143.416 114.645 145.568 114.018C149.783 113.031 151.487 110.251 151.487 103.974V103.257H168.345V103.885C168.345 110.341 167.269 113.569 163.862 115.094C160.634 116.529 154.805 116.618 145.568 116.618C161.351 117.605 167.718 122.626 167.718 132.849C167.718 144.596 157.764 149.618 137.587 149.618H131.49C126.558 149.618 122.971 149.708 120.549 149.977C115.886 150.425 114.81 151.501 114.81 153.295C114.81 154.012 115.259 154.729 116.245 155.088C118.128 155.895 122.702 156.164 130.862 156.164H144.851C163.144 156.164 170.856 160.02 170.856 171.588V172.036Z" fill="#EFF88B"/>
+      </svg>
+    </a>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-8">
+      <!-- Video Marketing dropdown (Management active) -->
+      <div class="relative group">
+        <button class="font-label text-primary hover:text-primary transition-colors duration-500 text-xs tracking-widest uppercase flex items-center gap-1 py-2 whitespace-nowrap">
+          Video Marketing
+          <span class="material-symbols-outlined text-base transition-transform duration-300 group-hover:rotate-180">expand_more</span>
+        </button>
+        <div class="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+          <div class="bg-surface-container-low border border-primary/10 min-w-[200px] py-2 shadow-2xl shadow-black/60">
+            <a href="video-marketing.html#video" class="block px-5 py-3 font-label text-stone-400 hover:text-primary hover:bg-primary/5 text-xs tracking-widest uppercase transition-all duration-300">Video</a>
+            <a href="video-marketing.html#ads" class="block px-5 py-3 font-label text-stone-400 hover:text-primary hover:bg-primary/5 text-xs tracking-widest uppercase transition-all duration-300">Ads</a>
+            <a href="video-marketing.html#management" class="block px-5 py-3 font-label text-primary hover:text-primary hover:bg-primary/5 text-xs tracking-widest uppercase transition-all duration-300">Management</a>
+          </div>
+        </div>
+      </div>
+      <a class="font-label text-stone-400 hover:text-secondary transition-colors duration-500 text-xs tracking-widest uppercase whitespace-nowrap" href="live-production.html">Live Production Consulting</a>
+      <a class="font-label text-stone-500 hover:text-tertiary transition-colors duration-500 text-xs tracking-widest uppercase" href="index.html#work">Work</a>
+      <a class="font-label text-stone-500 hover:text-tertiary transition-colors duration-500 text-xs tracking-widest uppercase" href="index.html#contact">Contact</a>
+    </div>
+
+    <!-- CTA Button -->
+    <a href="index.html#contact" class="hidden md:block font-label bg-tertiary text-on-primary px-6 py-3 font-bold tracking-widest text-xs uppercase hover:scale-95 active:scale-90 transition-all duration-400 bloom-hover-cream">
+      START PROJECT
+    </a>
+
+    <!-- Mobile Hamburger -->
+    <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
+      <span class="block w-6 h-[2px] bg-stone-200 transition-all duration-300 origin-center" id="bar1"></span>
+      <span class="block w-6 h-[2px] bg-stone-200 transition-all duration-300" id="bar2"></span>
+      <span class="block w-4 h-[2px] bg-stone-200 transition-all duration-300 origin-center" id="bar3"></span>
+    </button>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-background flex flex-col items-center justify-center gap-5 transition-all duration-500 opacity-0 pointer-events-none z-[60] overflow-y-auto py-24">
+      <span class="font-anton text-3xl md:text-4xl uppercase text-primary">Video Marketing</span>
+      <a href="video-marketing.html#video" class="font-label text-sm uppercase tracking-[0.25em] text-stone-300 hover:text-primary transition-colors">Video</a>
+      <a href="video-marketing.html#ads" class="font-label text-sm uppercase tracking-[0.25em] text-stone-300 hover:text-primary transition-colors">Ads</a>
+      <a href="video-marketing.html#management" class="font-label text-sm uppercase tracking-[0.25em] text-primary transition-colors">Management</a>
+      <a href="live-production.html" class="font-anton text-3xl md:text-4xl uppercase text-stone-200 hover:text-secondary transition-colors mt-4">Live Production Consulting</a>
+      <a href="index.html#work" class="font-anton text-3xl md:text-4xl uppercase text-stone-200 hover:text-tertiary transition-colors mt-4">Work</a>
+      <a href="index.html#contact" class="font-anton text-3xl md:text-4xl uppercase text-stone-200 hover:text-tertiary transition-colors">Contact</a>
+      <a href="index.html#contact" class="mt-4 px-10 py-4 bg-tertiary text-on-primary font-label font-bold text-sm tracking-widest uppercase">Start Project</a>
+    </div>
+  </nav>
+
+
+  <!-- ========== HERO ========== -->
+  <main class="relative min-h-screen w-full flex flex-col justify-center items-center overflow-hidden bg-background">
+    <!-- Cream glow orbs -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-tertiary/[0.05] rounded-full blur-[200px] z-0"></div>
+    <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-tertiary/[0.04] rounded-full blur-[180px] z-0"></div>
+    <div class="absolute inset-0 z-0 abyssal-grain"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-background/0 via-background/40 to-background z-0"></div>
+
+    <!-- Hero Content -->
+    <div class="relative z-20 text-center px-4 max-w-7xl mx-auto mt-20">
+      <p class="font-label text-tertiary text-xs md:text-sm tracking-[0.3em] uppercase mb-8">Marketing Strategy</p>
+
+      <h1 class="font-anton text-[13vw] md:text-[10vw] tracking-tighter uppercase select-none transition-transform duration-700 ease-out hover:scale-[1.03] origin-center">
+        <span class="block leading-[0.85] text-on-surface">STRATEGY</span>
+        <span class="block leading-[0.85] text-tertiary text-glow-cream">THAT SHIPS.</span>
+      </h1>
+
+      <p class="text-stone-400 text-base md:text-lg max-w-xl mx-auto mt-10 md:mt-12 leading-relaxed">
+        The roadmap behind work that moves the business. We plan where the budget goes, then show you what it earned.
+      </p>
+
+      <!-- CTA -->
+      <div class="mt-12">
+        <a href="#the-plan" class="group relative inline-flex items-center gap-4 bg-tertiary text-on-primary px-10 md:px-12 py-5 md:py-6 font-anton text-xl md:text-2xl tracking-tight transition-all duration-500 bloom-hover-cream">
+          SEE THE PROCESS
+          <span class="material-symbols-outlined group-hover:translate-y-1 transition-transform duration-300">arrow_downward</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Wave Divider -->
+    <div class="absolute bottom-0 left-0 w-full leading-[0] z-30">
+      <svg class="relative block w-full h-[60px] md:h-[90px]" preserveAspectRatio="none" viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg">
+        <path d="M985.66,92.83C906.67,72,823.78,31,743.84,14.19c-82.26-17.34-168.06-16.33-250.45.39-57.84,11.73-114,31.07-172,41.86A600.21,600.21,0,0,1,0,27.35V120H1200V95.8C1132.19,118.92,1055.71,111.31,985.66,92.83Z" fill="#1b1b20"></path>
+      </svg>
+    </div>
+  </main>
+
+
+  <!-- ========== THE PLAN / INTRO ========== -->
+  <section id="the-plan" class="bg-surface-container-low py-24 md:py-40 px-6 md:px-12 relative overflow-hidden">
+    <!-- Background cream glow -->
+    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-tertiary/[0.04] rounded-full blur-[180px]"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-start">
+
+        <!-- Left: Eyebrow + Headline -->
+        <div class="md:col-span-5 reveal">
+          <p class="font-label text-tertiary text-xs tracking-[0.3em] uppercase mb-6">The Plan</p>
+          <h2 class="font-anton text-5xl md:text-7xl uppercase leading-none tracking-tighter text-on-surface">
+            Plans that become<br/><span class="text-tertiary text-glow-cream">weeks.</span>
+          </h2>
+        </div>
+
+        <!-- Right: Body copy -->
+        <div class="md:col-span-7 reveal space-y-6 text-stone-300 text-base md:text-lg leading-relaxed">
+          <p>
+            Most strategy decks get filed and forgotten. Ours come with a calendar, an owner, and a number to hit. The point of a plan is that it ships.
+          </p>
+          <p>
+            We look at the business, the audience, and the numbers, then build the roadmap that moves budget into results. No theory, no fluff.
+          </p>
+          <p>
+            You get a plan that tells you what to make, who to make it for, and how you'll know it's working. The work that follows is built to sell.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== WHAT WE BUILD ========== -->
+  <section id="services" class="bg-background py-24 md:py-32 px-6 md:px-12 relative">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="mb-16 md:mb-20 reveal">
+        <p class="font-label text-tertiary text-xs tracking-[0.3em] uppercase mb-6">What We Build</p>
+        <h2 class="font-anton text-5xl md:text-7xl uppercase leading-none tracking-tighter text-on-surface max-w-4xl">
+          Strategy that earns its weight.
+        </h2>
+      </div>
+
+      <div class="space-y-3 md:space-y-4">
+
+        <!-- Paid Ads -->
+        <div class="service-band group cursor-pointer bg-surface-container-low border-l-4 border-tertiary/40 hover:border-tertiary px-6 md:px-10 py-8 transition-all duration-500 hover:bg-surface-container reveal">
+          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-12">
+            <h3 class="font-anton text-3xl md:text-5xl uppercase tracking-tighter text-on-surface group-hover:text-tertiary transition-colors duration-500 flex-shrink-0">
+              Paid Ads
+            </h3>
+            <div class="max-w-lg">
+              <p class="text-stone-400 leading-relaxed mb-4">
+                Budgets, channels, audiences, and creative briefs. The plan behind spend that compounds. We map where the money goes before it moves.
+              </p>
+              <div class="flex flex-wrap gap-3 mt-4">
+                <span class="px-3 py-1 border border-tertiary/10 text-tertiary/60 font-label text-[10px] tracking-widest uppercase">Budget Plan</span>
+                <span class="px-3 py-1 border border-tertiary/10 text-tertiary/60 font-label text-[10px] tracking-widest uppercase">Audiences</span>
+                <span class="px-3 py-1 border border-tertiary/10 text-tertiary/60 font-label text-[10px] tracking-widest uppercase">Creative Briefs</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-stone-600 group-hover:text-tertiary group-hover:translate-x-2 transition-all duration-300 hidden md:block mt-2">arrow_forward</span>
+          </div>
+        </div>
+
+        <!-- Social Strategy -->
+        <div class="service-band group cursor-pointer bg-surface-container-low border-l-4 border-tertiary/40 hover:border-tertiary px-6 md:px-10 py-8 transition-all duration-500 hover:bg-surface-container reveal">
+          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-12">
+            <h3 class="font-anton text-3xl md:text-5xl uppercase tracking-tighter text-on-surface group-hover:text-tertiary transition-colors duration-500 flex-shrink-0">
+              Social Strategy
+            </h3>
+            <div class="max-w-lg">
+              <p class="text-stone-400 leading-relaxed mb-4">
+                Channel fit, content cadence, and the voice that carries across posts. Built for the audience you're chasing, not the one your competitor has.
+              </p>
+              <div class="flex flex-wrap gap-3 mt-4">
+                <span class="px-3 py-1 border border-tertiary/10 text-tertiary/60 font-label text-[10px] tracking-widest uppercase">Cadence</span>
+                <span class="px-3 py-1 border border-tertiary/10 text-tertiary/60 font-label text-[10px] tracking-widest uppercase">Voice</span>
+                <span class="px-3 py-1 border border-tertiary/10 text-tertiary/60 font-label text-[10px] tracking-widest uppercase">Channel Fit</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-stone-600 group-hover:text-tertiary group-hover:translate-x-2 transition-all duration-300 hidden md:block mt-2">arrow_forward</span>
+          </div>
+        </div>
+
+        <!-- Analytics -->
+        <div class="service-band group cursor-pointer bg-surface-container-low border-l-4 border-tertiary/40 hover:border-tertiary px-6 md:px-10 py-8 transition-all duration-500 hover:bg-surface-container reveal">
+          <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4 md:gap-12">
+            <h3 class="font-anton text-3xl md:text-5xl uppercase tracking-tighter text-on-surface group-hover:text-tertiary transition-colors duration-500 flex-shrink-0">
+              Analytics
+            </h3>
+            <div class="max-w-lg">
+              <p class="text-stone-400 leading-relaxed mb-4">
+                Dashboards that tell the truth. KPIs tied to revenue, not to vanity. Weekly reads that shape what you ship next.
+              </p>
+              <div class="flex flex-wrap gap-3 mt-4">
+                <span class="px-3 py-1 border border-tertiary/10 text-tertiary/60 font-label text-[10px] tracking-widest uppercase">Dashboards</span>
+                <span class="px-3 py-1 border border-tertiary/10 text-tertiary/60 font-label text-[10px] tracking-widest uppercase">KPIs</span>
+                <span class="px-3 py-1 border border-tertiary/10 text-tertiary/60 font-label text-[10px] tracking-widest uppercase">Weekly Reads</span>
+              </div>
+            </div>
+            <span class="material-symbols-outlined text-stone-600 group-hover:text-tertiary group-hover:translate-x-2 transition-all duration-300 hidden md:block mt-2">arrow_forward</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== PROCESS STRIP ========== -->
+  <section id="process" class="bg-surface-dim py-24 md:py-32 px-6 md:px-12 relative overflow-hidden">
+    <!-- Cream glow -->
+    <div class="absolute top-1/3 right-0 w-[700px] h-[700px] bg-tertiary/[0.04] rounded-full blur-[200px]"></div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+
+      <div class="mb-12 md:mb-16 reveal">
+        <p class="font-label text-tertiary text-xs tracking-[0.3em] uppercase mb-6">How We Work</p>
+        <h2 class="font-anton text-5xl md:text-7xl uppercase leading-none tracking-tighter text-on-surface">
+          Four steps to shipping.
+        </h2>
+        <p class="text-stone-500 text-sm md:text-base mt-6 max-w-xl">
+          Every engagement moves through the same rhythm. By the end, you have a plan you can work against and numbers you can watch.
+        </p>
+      </div>
+
+      <!-- 4 steps -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+
+        <div class="process-step bg-surface-container-low border border-white/5 p-8 md:p-10 reveal">
+          <p class="font-anton text-5xl md:text-6xl text-tertiary/70 mb-6">01</p>
+          <h3 class="font-anton text-2xl md:text-3xl uppercase tracking-tight text-on-surface mb-3">Audit</h3>
+          <p class="text-stone-400 text-sm leading-relaxed">
+            Where the business is, where the audience sits, where the gaps show up. We start with the numbers and the market before the plan.
+          </p>
+        </div>
+
+        <div class="process-step bg-surface-container-low border border-white/5 p-8 md:p-10 reveal">
+          <p class="font-anton text-5xl md:text-6xl text-tertiary/70 mb-6">02</p>
+          <h3 class="font-anton text-2xl md:text-3xl uppercase tracking-tight text-on-surface mb-3">Roadmap</h3>
+          <p class="text-stone-400 text-sm leading-relaxed">
+            Budget, channels, content pillars, and a calendar with real dates. The plan ships with owners so nothing stalls in a deck.
+          </p>
+        </div>
+
+        <div class="process-step bg-surface-container-low border border-white/5 p-8 md:p-10 reveal">
+          <p class="font-anton text-5xl md:text-6xl text-tertiary/70 mb-6">03</p>
+          <h3 class="font-anton text-2xl md:text-3xl uppercase tracking-tight text-on-surface mb-3">Execution</h3>
+          <p class="text-stone-400 text-sm leading-relaxed">
+            Creative briefs, production, media buying, platform setup. We hand off or run it ourselves, depending on the shape of your team.
+          </p>
+        </div>
+
+        <div class="process-step bg-surface-container-low border border-white/5 p-8 md:p-10 reveal">
+          <p class="font-anton text-5xl md:text-6xl text-tertiary/70 mb-6">04</p>
+          <h3 class="font-anton text-2xl md:text-3xl uppercase tracking-tight text-on-surface mb-3">Measurement</h3>
+          <p class="text-stone-400 text-sm leading-relaxed">
+            Dashboards live. Weekly reads inform the next test. The loop tightens every cycle, and the plan keeps compounding.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========== CTA ========== -->
+  <section id="cta" class="bg-background relative py-32 md:py-48 overflow-hidden">
+    <!-- Cream glow -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] bg-tertiary/[0.05] rounded-full blur-[200px]"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-6 md:px-12 text-center reveal">
+      <h2 class="font-anton text-6xl md:text-8xl lg:text-9xl uppercase leading-[0.85] tracking-tighter text-on-surface mb-8">
+        BUILD<br/><span class="text-tertiary text-glow-cream">THE PLAN.</span>
+      </h2>
+      <p class="text-stone-400 text-lg md:text-xl mb-12 max-w-lg mx-auto">
+        Tell us about the business. We'll tell you what it takes to move.
+      </p>
+      <a href="mailto:hello@bigsplashvideo.com?subject=Marketing%20Strategy%20Inquiry" class="group inline-flex items-center gap-4 bg-tertiary text-on-primary px-12 py-6 font-anton text-2xl tracking-tight transition-all duration-500 bloom-hover-cream">
+        START THE CONVERSATION
+        <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-300">arrow_forward</span>
+      </a>
+      <p class="mt-8 font-label text-xs tracking-widest uppercase text-stone-600">hello@bigsplashvideo.com</p>
+    </div>
+  </section>
+
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="bg-surface-dim border-t border-white/5 py-16 md:py-20 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 mb-16">
+        <!-- Logo -->
+        <div>
+          <a href="index.html" aria-label="Big Splash Home">
+            <svg class="h-5 w-auto mb-4" viewBox="0 0 655 191" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M170.856 172.036C170.856 175.982 169.691 179.3 167.449 182.08C162.786 187.729 153.191 190.778 136.96 190.778H133.014C125.481 190.778 119.473 190.42 114.9 189.433C105.933 187.64 102.077 184.142 102.077 178.852C102.077 172.037 107.009 168.45 120.101 167.373C108.085 167.284 101.808 165.67 101.808 157.958C101.808 151.95 106.56 147.376 119.742 146.928C109.789 145.493 104.318 141.727 104.318 132.849C104.318 121.909 114.183 114.825 135.166 114.825H137.229C140.726 114.825 143.416 114.645 145.568 114.018C149.783 113.031 151.487 110.251 151.487 103.974V103.257H168.345V103.885C168.345 110.341 167.269 113.569 163.862 115.094C160.634 116.529 154.805 116.618 145.568 116.618C161.351 117.605 167.718 122.626 167.718 132.849C167.718 144.596 157.764 149.618 137.587 149.618H131.49C126.558 149.618 122.971 149.708 120.549 149.977C115.886 150.425 114.81 151.501 114.81 153.295C114.81 154.012 115.259 154.729 116.245 155.088C118.128 155.895 122.702 156.164 130.862 156.164H144.851C163.144 156.164 170.856 160.02 170.856 171.588V172.036Z" fill="#EFF88B"/>
+            </svg>
+          </a>
+          <p class="text-stone-600 text-xs leading-relaxed">Video-first marketing for service businesses.</p>
+        </div>
+
+        <!-- Nav -->
+        <div>
+          <h4 class="font-label text-[10px] tracking-widest uppercase text-stone-500 mb-6">Navigate</h4>
+          <ul class="space-y-3">
+            <li><a href="index.html#work" class="text-sm text-stone-500 hover:text-tertiary transition-colors duration-300">Work</a></li>
+            <li><a href="index.html#services" class="text-sm text-stone-500 hover:text-tertiary transition-colors duration-300">Services</a></li>
+            <li><a href="index.html#about" class="text-sm text-stone-500 hover:text-tertiary transition-colors duration-300">About</a></li>
+            <li><a href="index.html#contact" class="text-sm text-stone-500 hover:text-tertiary transition-colors duration-300">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Services -->
+        <div>
+          <h4 class="font-label text-[10px] tracking-widest uppercase text-stone-500 mb-6">Services</h4>
+          <ul class="space-y-3">
+            <li><a href="video-marketing.html" class="text-sm text-stone-500 hover:text-primary transition-colors duration-300">Video Marketing</a></li>
+            <li><a href="live-production.html" class="text-sm text-stone-500 hover:text-secondary transition-colors duration-300">Live Production Consulting</a></li>
+            <li><a href="marketing-strategy.html" class="text-sm text-tertiary hover:text-tertiary/80 transition-colors duration-300">Marketing Strategy</a></li>
+          </ul>
+        </div>
+
+        <!-- Social -->
+        <div>
+          <h4 class="font-label text-[10px] tracking-widest uppercase text-stone-500 mb-6">Connect</h4>
+          <div class="flex flex-col gap-3">
+            <a class="font-label text-xs tracking-widest uppercase text-stone-500 hover:text-tertiary transition-all duration-300" href="#">Instagram</a>
+            <a class="font-label text-xs tracking-widest uppercase text-stone-500 hover:text-tertiary transition-all duration-300" href="#">Facebook</a>
+            <a class="font-label text-xs tracking-widest uppercase text-stone-500 hover:text-tertiary transition-all duration-300" href="#">LinkedIn</a>
+            <a class="font-label text-xs tracking-widest uppercase text-stone-500 hover:text-tertiary transition-all duration-300" href="#">X</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p class="font-label text-[10px] tracking-widest uppercase text-stone-600">&copy; 2026 Big Splash. All rights reserved.</p>
+        <p class="font-label text-[10px] tracking-widest uppercase text-stone-600">Austin, TX &mdash; 30.6333&deg; N, 97.6780&deg; W</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ========== VIDEO MODAL ========== -->
+  <div id="video-overlay" class="fixed inset-0 z-[9998] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-1000 ease-out"></div>
+
+
+  <!-- ========== SCRIPTS ========== -->
+  <script src="js/animations.js"></script>
+
+</body>
+</html>

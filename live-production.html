@@ -214,10 +214,24 @@
     </a>
 
     <!-- Desktop Nav -->
-    <div class="hidden md:flex items-center gap-10">
+    <div class="hidden md:flex items-center gap-8">
+      <!-- Video Marketing dropdown -->
+      <div class="relative group">
+        <button class="font-label text-stone-400 hover:text-secondary transition-colors duration-500 text-xs tracking-widest uppercase flex items-center gap-1 py-2 whitespace-nowrap">
+          Video Marketing
+          <span class="material-symbols-outlined text-base transition-transform duration-300 group-hover:rotate-180">expand_more</span>
+        </button>
+        <div class="absolute top-full left-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+          <div class="bg-surface-container-low border border-secondary/10 min-w-[200px] py-2 shadow-2xl shadow-black/60">
+            <a href="video-marketing.html#video" class="block px-5 py-3 font-label text-stone-400 hover:text-secondary hover:bg-secondary/5 text-xs tracking-widest uppercase transition-all duration-300">Video</a>
+            <a href="video-marketing.html#ads" class="block px-5 py-3 font-label text-stone-400 hover:text-secondary hover:bg-secondary/5 text-xs tracking-widest uppercase transition-all duration-300">Ads</a>
+            <a href="video-marketing.html#management" class="block px-5 py-3 font-label text-stone-400 hover:text-secondary hover:bg-secondary/5 text-xs tracking-widest uppercase transition-all duration-300">Management</a>
+          </div>
+        </div>
+      </div>
+      <!-- Live Production (active on this page) -->
+      <a class="font-label text-secondary hover:text-secondary transition-colors duration-500 text-xs tracking-widest uppercase whitespace-nowrap" href="live-production.html">Live Production Consulting</a>
       <a class="font-label text-stone-500 hover:text-secondary transition-colors duration-500 text-xs tracking-widest uppercase" href="index.html#work">Work</a>
-      <a class="font-label text-secondary hover:text-secondary transition-colors duration-500 text-xs tracking-widest uppercase" href="index.html#services">Services</a>
-      <a class="font-label text-stone-500 hover:text-secondary transition-colors duration-500 text-xs tracking-widest uppercase" href="index.html#about">About</a>
       <a class="font-label text-stone-500 hover:text-secondary transition-colors duration-500 text-xs tracking-widest uppercase" href="index.html#contact">Contact</a>
     </div>
 
@@ -234,12 +248,15 @@
     </button>
 
     <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-background flex flex-col items-center justify-center gap-8 transition-all duration-500 opacity-0 pointer-events-none z-[60]">
-      <a href="index.html#work" class="font-anton text-4xl uppercase text-stone-200 hover:text-secondary transition-colors">Work</a>
-      <a href="index.html#services" class="font-anton text-4xl uppercase text-secondary transition-colors">Services</a>
-      <a href="index.html#about" class="font-anton text-4xl uppercase text-stone-200 hover:text-secondary transition-colors">About</a>
-      <a href="index.html#contact" class="font-anton text-4xl uppercase text-stone-200 hover:text-secondary transition-colors">Contact</a>
-      <a href="index.html#contact" class="mt-4 px-10 py-4 bg-secondary text-on-surface font-label font-bold text-sm tracking-widest uppercase">Start Project</a>
+    <div id="mobile-menu" class="fixed inset-0 bg-background flex flex-col items-center justify-center gap-5 transition-all duration-500 opacity-0 pointer-events-none z-[60] overflow-y-auto py-24">
+      <span class="font-anton text-3xl md:text-4xl uppercase text-stone-200">Video Marketing</span>
+      <a href="video-marketing.html#video" class="font-label text-sm uppercase tracking-[0.25em] text-stone-300 hover:text-primary transition-colors">Video</a>
+      <a href="video-marketing.html#ads" class="font-label text-sm uppercase tracking-[0.25em] text-stone-300 hover:text-primary transition-colors">Ads</a>
+      <a href="video-marketing.html#management" class="font-label text-sm uppercase tracking-[0.25em] text-stone-300 hover:text-primary transition-colors">Management</a>
+      <a href="live-production.html" class="font-anton text-3xl md:text-4xl uppercase text-secondary transition-colors mt-4">Live Production Consulting</a>
+      <a href="index.html#work" class="font-anton text-3xl md:text-4xl uppercase text-stone-200 hover:text-secondary transition-colors mt-4">Work</a>
+      <a href="index.html#contact" class="font-anton text-3xl md:text-4xl uppercase text-stone-200 hover:text-secondary transition-colors">Contact</a>
+      <a href="index.html#contact" class="mt-6 px-10 py-4 bg-secondary text-on-surface font-label font-bold text-sm tracking-widest uppercase">Start Project</a>
     </div>
   </nav>
 
