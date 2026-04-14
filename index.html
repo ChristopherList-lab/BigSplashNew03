@@ -90,13 +90,8 @@
     body.menu-open #bar2 { opacity: 0; }
     body.menu-open #bar3 { width: 24px; transform: rotate(-45deg) translateY(-5px) translateX(4px); }
 
-    /* Service band expand */
-    .service-band { max-height: 120px; overflow: hidden; transition: max-height 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-    .service-band.expanded, .service-band:hover { max-height: 400px; }
-    @media (min-width: 768px) {
-      .service-band { max-height: 140px; }
-      .service-band.expanded, .service-band:hover { max-height: 500px; }
-    }
+    /* Service band */
+    .service-band { transition: background-color 0.5s, border-color 0.5s; }
 
     /* Custom scrollbar */
     ::-webkit-scrollbar { width: 5px; }
@@ -214,9 +209,9 @@
 
     <!-- Hero Content -->
     <div class="relative z-20 text-center px-4 max-w-7xl mx-auto mt-20">
-      <h1 class="font-anton text-[13vw] md:text-[10vw] leading-[0.85] tracking-tighter uppercase text-on-surface">
-        MAKE YOUR <br/>
-        <span class="text-primary text-glow-lime">SPLASH</span>
+      <h1 class="font-anton text-[13vw] md:text-[10vw] tracking-tighter uppercase">
+        <span class="block leading-[0.85] text-on-surface">MAKE YOUR</span>
+        <span class="block leading-[0.85] text-primary text-glow-lime">SPLASH</span>
       </h1>
 
       <!-- Pill Tags -->
@@ -383,7 +378,7 @@
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
 
         <!-- Row 1: Large + Small -->
-        <div class="md:col-span-2 group relative overflow-hidden aspect-[2.39/1] bg-surface-container cursor-pointer reveal">
+        <div class="md:col-span-2 group relative overflow-hidden aspect-[2.39/1] bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/nothing-fits.mp4">
           <img src="assets/images/portfolio/nothing-fits.webp" alt="Nothing Fits" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -392,12 +387,12 @@
             </div>
           </div>
           <div class="absolute bottom-6 md:bottom-8 left-6 md:left-8">
-            <p class="font-label text-[10px] text-primary mb-2 uppercase tracking-widest">Documentary / 2025</p>
+            <p class="font-label text-[10px] text-primary mb-2 uppercase tracking-widest">Youtube Content</p>
             <h3 class="font-anton text-2xl md:text-3xl uppercase text-white">NOTHING FITS</h3>
           </div>
         </div>
 
-        <div class="group relative overflow-hidden aspect-[16/9] md:aspect-auto bg-surface-container cursor-pointer reveal">
+        <div class="group relative overflow-hidden aspect-[16/9] md:aspect-auto bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/covert-auto.mp4">
           <img src="assets/images/portfolio/covert-auto.webp" alt="Covert Auto" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -406,13 +401,13 @@
             </div>
           </div>
           <div class="absolute bottom-6 left-6">
-            <p class="font-label text-[10px] text-secondary mb-2 uppercase tracking-widest">Live Production Consulting</p>
+            <p class="font-label text-[10px] text-secondary mb-2 uppercase tracking-widest">Covert Auto Commercial</p>
             <h3 class="font-anton text-2xl uppercase text-white">COVERT AUTO</h3>
           </div>
         </div>
 
         <!-- Row 2: Small + Large -->
-        <div class="group relative overflow-hidden aspect-[16/9] md:aspect-auto bg-surface-container cursor-pointer reveal">
+        <div class="group relative overflow-hidden aspect-[16/9] md:aspect-auto bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/buyers-market.mp4">
           <img src="assets/images/portfolio/buyers-market.webp" alt="Buyers Market" class="absolute inset-0 w-full h-full object-cover object-[50%_30%]" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -421,12 +416,12 @@
             </div>
           </div>
           <div class="absolute bottom-6 left-6">
-            <p class="font-label text-[10px] text-primary mb-2 uppercase tracking-widest">Video Marketing / 2025</p>
+            <p class="font-label text-[10px] text-primary mb-2 uppercase tracking-widest">Social Media Content</p>
             <h3 class="font-anton text-2xl uppercase text-white">BUYERS MARKET</h3>
           </div>
         </div>
 
-        <div class="md:col-span-2 group relative overflow-hidden aspect-[2.39/1] bg-surface-container cursor-pointer reveal">
+        <div class="md:col-span-2 group relative overflow-hidden aspect-[2.39/1] bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/jordan-vb.mp4">
           <img src="assets/images/portfolio/jordan-vb.webp" alt="Jordan VB" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -435,13 +430,13 @@
             </div>
           </div>
           <div class="absolute bottom-6 md:bottom-8 left-6 md:left-8">
-            <p class="font-label text-[10px] text-secondary mb-2 uppercase tracking-widest">Live Production Consulting</p>
+            <p class="font-label text-[10px] text-secondary mb-2 uppercase tracking-widest">Vocal Booth</p>
             <h3 class="font-anton text-2xl md:text-3xl uppercase text-white">JORDAN VB</h3>
           </div>
         </div>
 
         <!-- Row 3: Three small -->
-        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal">
+        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/warlock.mp4">
           <img src="assets/images/portfolio/warlock.webp" alt="Warlock" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -455,7 +450,7 @@
           </div>
         </div>
 
-        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal">
+        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/fig-bluff.mp4">
           <img src="assets/images/portfolio/fig-bluff.webp" alt="Fig Bluff" class="absolute inset-0 w-full h-full object-cover object-[50%_30%]" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -464,12 +459,12 @@
             </div>
           </div>
           <div class="absolute bottom-6 left-6">
-            <p class="font-label text-[10px] text-tertiary mb-2 uppercase tracking-widest">Brand Story</p>
+            <p class="font-label text-[10px] text-tertiary mb-2 uppercase tracking-widest">Real Estate Lifestyle</p>
             <h3 class="font-anton text-2xl uppercase text-white">FIG BLUFF</h3>
           </div>
         </div>
 
-        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal">
+        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/oct-recap.mp4">
           <img src="assets/images/portfolio/oct-recap.webp" alt="Oct Recap" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -478,13 +473,13 @@
             </div>
           </div>
           <div class="absolute bottom-6 left-6">
-            <p class="font-label text-[10px] text-secondary mb-2 uppercase tracking-widest">Event Recap</p>
+            <p class="font-label text-[10px] text-secondary mb-2 uppercase tracking-widest">City Reach Church Recap</p>
             <h3 class="font-anton text-2xl uppercase text-white">OCT RECAP</h3>
           </div>
         </div>
 
         <!-- Row 4: Large + Small -->
-        <div class="md:col-span-2 group relative overflow-hidden aspect-[2.39/1] bg-surface-container cursor-pointer reveal">
+        <div class="md:col-span-2 group relative overflow-hidden aspect-[2.39/1] bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/elisa.mp4">
           <img src="assets/images/portfolio/elisa.webp" alt="Elisa" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -493,12 +488,12 @@
             </div>
           </div>
           <div class="absolute bottom-6 md:bottom-8 left-6 md:left-8">
-            <p class="font-label text-[10px] text-primary mb-2 uppercase tracking-widest">Video Marketing / 2025</p>
+            <p class="font-label text-[10px] text-primary mb-2 uppercase tracking-widest">Testimony</p>
             <h3 class="font-anton text-2xl md:text-3xl uppercase text-white">ELISA</h3>
           </div>
         </div>
 
-        <div class="group relative overflow-hidden aspect-[16/9] md:aspect-auto bg-surface-container cursor-pointer reveal">
+        <div class="group relative overflow-hidden aspect-[16/9] md:aspect-auto bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/magnetic-brand.mp4">
           <img src="assets/images/portfolio/magnetic-brand.webp" alt="Magnetic Brand" class="absolute inset-0 w-full h-full object-cover object-[50%_30%]" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -507,13 +502,13 @@
             </div>
           </div>
           <div class="absolute bottom-6 left-6">
-            <p class="font-label text-[10px] text-tertiary mb-2 uppercase tracking-widest">Strategy</p>
+            <p class="font-label text-[10px] text-tertiary mb-2 uppercase tracking-widest">Scottie Campbell Social</p>
             <h3 class="font-anton text-2xl uppercase text-white">MAGNETIC BRAND</h3>
           </div>
         </div>
 
         <!-- Row 5: Small + Large -->
-        <div class="group relative overflow-hidden aspect-[16/9] md:aspect-auto bg-surface-container cursor-pointer reveal">
+        <div class="group relative overflow-hidden aspect-[16/9] md:aspect-auto bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/narration.mp4">
           <img src="assets/images/portfolio/35sec-narration.webp" alt="35 Sec Narration" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -522,12 +517,12 @@
             </div>
           </div>
           <div class="absolute bottom-6 left-6">
-            <p class="font-label text-[10px] text-primary mb-2 uppercase tracking-widest">Ad Creative</p>
+            <p class="font-label text-[10px] text-primary mb-2 uppercase tracking-widest">Torcheys Tacos</p>
             <h3 class="font-anton text-2xl uppercase text-white">NARRATION SPOT</h3>
           </div>
         </div>
 
-        <div class="md:col-span-2 group relative overflow-hidden aspect-[2.39/1] bg-surface-container cursor-pointer reveal">
+        <div class="md:col-span-2 group relative overflow-hidden aspect-[2.39/1] bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/bdpm.mp4">
           <img src="assets/images/portfolio/bdpm.webp" alt="BDPM" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -536,13 +531,13 @@
             </div>
           </div>
           <div class="absolute bottom-6 md:bottom-8 left-6 md:left-8">
-            <p class="font-label text-[10px] text-secondary mb-2 uppercase tracking-widest">Live Production Consulting</p>
+            <p class="font-label text-[10px] text-secondary mb-2 uppercase tracking-widest">Chiropractic Commercial</p>
             <h3 class="font-anton text-2xl md:text-3xl uppercase text-white">BDPM 2025</h3>
           </div>
         </div>
 
         <!-- Row 6: Three small -->
-        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal">
+        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/austin-walk.mp4">
           <img src="assets/images/portfolio/austin-walk.webp" alt="Austin Walk" class="absolute inset-0 w-full h-full object-cover object-[50%_30%]" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -551,12 +546,12 @@
             </div>
           </div>
           <div class="absolute bottom-6 left-6">
-            <p class="font-label text-[10px] text-tertiary mb-2 uppercase tracking-widest">Brand Story</p>
+            <p class="font-label text-[10px] text-tertiary mb-2 uppercase tracking-widest">Mortgage Content</p>
             <h3 class="font-anton text-2xl uppercase text-white">AUSTIN WALK</h3>
           </div>
         </div>
 
-        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal">
+        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/turner.mp4">
           <img src="assets/images/portfolio/turner.webp" alt="Turner" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -565,12 +560,12 @@
             </div>
           </div>
           <div class="absolute bottom-6 left-6">
-            <p class="font-label text-[10px] text-primary mb-2 uppercase tracking-widest">Video Marketing</p>
+            <p class="font-label text-[10px] text-primary mb-2 uppercase tracking-widest">Testimony</p>
             <h3 class="font-anton text-2xl uppercase text-white">TURNER</h3>
           </div>
         </div>
 
-        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal">
+        <div class="group relative overflow-hidden aspect-[16/9] bg-surface-container cursor-pointer reveal" data-video="assets/videos/portfolio/recap-edit.mp4">
           <img src="assets/images/portfolio/recap-edit.webp" alt="Recap Edit" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
           <div class="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-transparent opacity-80"></div>
           <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
@@ -579,7 +574,7 @@
             </div>
           </div>
           <div class="absolute bottom-6 left-6">
-            <p class="font-label text-[10px] text-secondary mb-2 uppercase tracking-widest">Event Recap</p>
+            <p class="font-label text-[10px] text-secondary mb-2 uppercase tracking-widest">Convey Recap</p>
             <h3 class="font-anton text-2xl uppercase text-white">RECAP EDIT</h3>
           </div>
         </div>
@@ -758,9 +753,9 @@
 
   <!-- ========== VIDEO MODAL ========== -->
   <div id="video-modal" class="fixed inset-0 z-[70] bg-black/90 backdrop-blur-sm flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300">
-    <button id="modal-close" class="absolute top-6 right-6 text-stone-400 hover:text-primary transition-colors text-4xl font-light" aria-label="Close video">&times;</button>
+    <button id="modal-close" class="absolute top-6 right-6 text-stone-400 hover:text-primary transition-colors text-4xl font-light z-10" aria-label="Close video">&times;</button>
     <div class="w-full max-w-5xl aspect-video mx-6">
-      <iframe id="modal-iframe" class="w-full h-full" src="" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <video id="modal-video" class="w-full h-full bg-black" controls playsinline></video>
     </div>
   </div>
 

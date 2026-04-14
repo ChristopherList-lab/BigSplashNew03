@@ -121,14 +121,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- Video Modal ---
   const modal = document.getElementById('video-modal');
-  const modalIframe = document.getElementById('modal-iframe');
+  const modalVideo = document.getElementById('modal-video');
   const modalClose = document.getElementById('modal-close');
 
   // Portfolio cards with data-video attribute open the modal
   document.querySelectorAll('[data-video]').forEach(card => {
     card.addEventListener('click', () => {
       const videoUrl = card.getAttribute('data-video');
-      modalIframe.src = videoUrl;
+      modalVideo.src = videoUrl;
+      modalVideo.play();
       modal.classList.remove('opacity-0', 'pointer-events-none');
       document.body.classList.add('modal-open');
     });
@@ -136,7 +137,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const closeModal = () => {
     modal.classList.add('opacity-0', 'pointer-events-none');
-    modalIframe.src = '';
+    modalVideo.pause();
+    modalVideo.src = '';
     document.body.classList.remove('modal-open');
   };
 
