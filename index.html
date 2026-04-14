@@ -104,43 +104,45 @@
 
     /* Video in-place playback */
     body.video-playing { overflow: hidden; }
-    .card-elevated {
-      position: fixed !important;
-      z-index: 9999 !important;
-      transform: none !important;
-      transition: none !important;
-      box-shadow: 0 0 100px rgba(239, 248, 139, 0.12), 0 4px 60px rgba(0,0,0,0.9);
+    #video-player {
+      position: fixed;
+      z-index: 99999;
+      background: #000;
+      box-shadow: 0 0 120px rgba(239, 248, 139, 0.1), 0 8px 80px rgba(0,0,0,0.9);
       border: 1px solid rgba(239, 248, 139, 0.08);
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.97);
+      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
     }
-    .card-elevated .card-video {
-      position: absolute;
-      inset: 0;
+    #video-player.vp-active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    #video-player video {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      background: #000;
-      z-index: 5;
-      border-radius: 2px;
     }
-    .card-elevated .card-close {
+    #video-player .vp-close {
       position: absolute;
-      top: -16px;
-      right: -16px;
+      top: -18px;
+      right: -18px;
       z-index: 10;
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: rgba(19,19,24,0.95);
       color: #e4e1e9;
       border: 1px solid rgba(239, 248, 139, 0.2);
-      font-size: 20px;
+      font-size: 22px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transition: background 0.2s, color 0.2s;
     }
-    .card-elevated .card-close:hover {
+    #video-player .vp-close:hover {
       background: rgba(239, 248, 139, 0.9);
       color: #2f3300;
     }
@@ -793,7 +795,7 @@
 
   <!-- ========== VIDEO MODAL ========== -->
   <!-- Video overlay (dims everything behind the active card) -->
-  <div id="video-overlay" class="fixed inset-0 z-[60] bg-black/85 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-500"></div>
+  <div id="video-overlay" class="fixed inset-0 z-[9998] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-700 ease-out"></div>
 
 
   <!-- ========== SCRIPTS ========== -->

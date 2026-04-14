@@ -121,72 +121,67 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- In-Place Video Playback ---
   const overlay = document.getElementById('video-overlay');
-  let activeCard = null;
-  let savedStyles = {};
+  let playerEl = null;
 
   const closeVideo = () => {
-    if (!activeCard) return;
-    const video = activeCard.querySelector('.card-video');
-    const closeBtn = activeCard.querySelector('.card-close');
-    if (video) { video.pause(); video.remove(); }
-    if (closeBtn) closeBtn.remove();
-    activeCard.classList.remove('card-elevated');
-    activeCard.style.cssText = savedStyles.cssText || '';
-    if (savedStyles.revealClass) {
-      activeCard.classList.add('reveal', 'visible');
-    }
+    if (!playerEl) return;
+    const vid = playerEl.querySelector('video');
+    if (vid) vid.pause();
+
+    // Animate out
+    playerEl.classList.remove('vp-active');
     overlay.classList.add('opacity-0');
     overlay.classList.remove('pointer-events-auto');
     overlay.classList.add('pointer-events-none');
     document.body.classList.remove('video-playing');
-    activeCard = null;
-    savedStyles = {};
+
+    const el = playerEl;
+    playerEl = null;
+    setTimeout(() => el.remove(), 600);
   };
 
   document.querySelectorAll('[data-video]').forEach(card => {
-    card.addEventListener('click', (e) => {
-      if (activeCard === card) return;
-      if (activeCard) closeVideo();
+    card.addEventListener('click', () => {
+      if (playerEl) closeVideo();
 
       const videoUrl = card.getAttribute('data-video');
       const rect = card.getBoundingClientRect();
 
-      // Save original inline styles
-      savedStyles = { cssText: card.style.cssText, revealClass: card.classList.contains('reveal') };
-      activeCard = card;
+      // Create a floating video player as direct child of body (outside all stacking contexts)
+      playerEl = document.createElement('div');
+      playerEl.id = 'video-player';
+      playerEl.style.top = rect.top + 'px';
+      playerEl.style.left = rect.left + 'px';
+      playerEl.style.width = rect.width + 'px';
+      playerEl.style.height = rect.height + 'px';
 
-      // Remove reveal transform (it creates a containing block that traps fixed positioning)
-      card.classList.remove('reveal', 'visible');
-
-      // Pin the card in its current viewport position using fixed
-      card.style.top = rect.top + 'px';
-      card.style.left = rect.left + 'px';
-      card.style.width = rect.width + 'px';
-      card.style.height = rect.height + 'px';
-      card.classList.add('card-elevated');
-
-      // Create video element
       const video = document.createElement('video');
-      video.className = 'card-video';
       video.src = videoUrl;
       video.currentTime = 0;
       video.controls = true;
       video.playsInline = true;
       video.autoplay = true;
 
-      // Create close button
       const closeBtn = document.createElement('button');
-      closeBtn.className = 'card-close';
+      closeBtn.className = 'vp-close';
       closeBtn.innerHTML = '&times;';
       closeBtn.addEventListener('click', (ev) => { ev.stopPropagation(); closeVideo(); });
 
-      card.appendChild(video);
-      card.appendChild(closeBtn);
+      playerEl.appendChild(video);
+      playerEl.appendChild(closeBtn);
+      document.body.appendChild(playerEl);
 
       // Show overlay
       overlay.classList.remove('opacity-0', 'pointer-events-none');
       overlay.classList.add('pointer-events-auto');
       document.body.classList.add('video-playing');
+
+      // Animate in
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          playerEl.classList.add('vp-active');
+        });
+      });
 
       video.play().catch(() => {});
     });
