@@ -113,7 +113,7 @@
       overflow: hidden;
       opacity: 0;
       transform: scale(0.97);
-      transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     }
     #video-player.vp-active {
       opacity: 1;
@@ -251,7 +251,7 @@
 
     <!-- Hero Content -->
     <div class="relative z-20 text-center px-4 max-w-7xl mx-auto mt-20">
-      <h1 class="font-anton text-[13vw] md:text-[10vw] tracking-tighter uppercase">
+      <h1 class="font-anton text-[13vw] md:text-[10vw] tracking-tighter uppercase pointer-events-none select-none">
         <span class="block leading-[0.85] text-on-surface">MAKE YOUR</span>
         <span class="block leading-[0.85] text-primary text-glow-lime">SPLASH</span>
       </h1>
@@ -795,7 +795,7 @@
 
   <!-- ========== VIDEO MODAL ========== -->
   <!-- Video overlay (dims everything behind the active card) -->
-  <div id="video-overlay" class="fixed inset-0 z-[9998] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-700 ease-out"></div>
+  <div id="video-overlay" class="fixed inset-0 z-[9998] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-1000 ease-out"></div>
 
 
   <!-- ========== SCRIPTS ========== -->

@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const el = playerEl;
     playerEl = null;
-    setTimeout(() => el.remove(), 600);
+    setTimeout(() => el.remove(), 1000);
   };
 
   document.querySelectorAll('[data-video]').forEach(card => {
