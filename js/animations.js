@@ -119,36 +119,77 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // --- Video Modal ---
-  const modal = document.getElementById('video-modal');
-  const modalVideo = document.getElementById('modal-video');
-  const modalClose = document.getElementById('modal-close');
+  // --- In-Place Video Playback ---
+  const overlay = document.getElementById('video-overlay');
+  let activeCard = null;
+  let savedStyles = {};
 
-  // Portfolio cards with data-video attribute open the modal
+  const closeVideo = () => {
+    if (!activeCard) return;
+    const video = activeCard.querySelector('.card-video');
+    const closeBtn = activeCard.querySelector('.card-close');
+    if (video) { video.pause(); video.remove(); }
+    if (closeBtn) closeBtn.remove();
+    activeCard.classList.remove('card-elevated');
+    activeCard.style.cssText = savedStyles.cssText || '';
+    overlay.classList.add('opacity-0');
+    overlay.classList.remove('pointer-events-auto');
+    overlay.classList.add('pointer-events-none');
+    document.body.classList.remove('video-playing');
+    activeCard = null;
+    savedStyles = {};
+  };
+
   document.querySelectorAll('[data-video]').forEach(card => {
-    card.addEventListener('click', () => {
+    card.addEventListener('click', (e) => {
+      if (activeCard === card) return;
+      if (activeCard) closeVideo();
+
       const videoUrl = card.getAttribute('data-video');
-      modalVideo.src = videoUrl;
-      modalVideo.play();
-      modal.classList.remove('opacity-0', 'pointer-events-none');
-      document.body.classList.add('modal-open');
+      const rect = card.getBoundingClientRect();
+
+      // Save original inline styles
+      savedStyles = { cssText: card.style.cssText };
+      activeCard = card;
+
+      // Pin the card in its current viewport position using fixed
+      card.style.top = rect.top + 'px';
+      card.style.left = rect.left + 'px';
+      card.style.width = rect.width + 'px';
+      card.style.height = rect.height + 'px';
+      card.classList.add('card-elevated');
+
+      // Create video element
+      const video = document.createElement('video');
+      video.className = 'card-video';
+      video.src = videoUrl;
+      video.currentTime = 0;
+      video.controls = true;
+      video.playsInline = true;
+      video.autoplay = true;
+
+      // Create close button
+      const closeBtn = document.createElement('button');
+      closeBtn.className = 'card-close';
+      closeBtn.innerHTML = '&times;';
+      closeBtn.addEventListener('click', (ev) => { ev.stopPropagation(); closeVideo(); });
+
+      card.appendChild(video);
+      card.appendChild(closeBtn);
+
+      // Show overlay
+      overlay.classList.remove('opacity-0', 'pointer-events-none');
+      overlay.classList.add('pointer-events-auto');
+      document.body.classList.add('video-playing');
+
+      video.play().catch(() => {});
     });
   });
 
-  const closeModal = () => {
-    modal.classList.add('opacity-0', 'pointer-events-none');
-    modalVideo.pause();
-    modalVideo.src = '';
-    document.body.classList.remove('modal-open');
-  };
-
-  if (modalClose) modalClose.addEventListener('click', closeModal);
-  if (modal) modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
+  if (overlay) overlay.addEventListener('click', closeVideo);
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+    if (e.key === 'Escape') closeVideo();
   });
 
 });
