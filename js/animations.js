@@ -132,6 +132,9 @@ document.addEventListener('DOMContentLoaded', () => {
     if (closeBtn) closeBtn.remove();
     activeCard.classList.remove('card-elevated');
     activeCard.style.cssText = savedStyles.cssText || '';
+    if (savedStyles.revealClass) {
+      activeCard.classList.add('reveal', 'visible');
+    }
     overlay.classList.add('opacity-0');
     overlay.classList.remove('pointer-events-auto');
     overlay.classList.add('pointer-events-none');
@@ -149,8 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const rect = card.getBoundingClientRect();
 
       // Save original inline styles
-      savedStyles = { cssText: card.style.cssText };
+      savedStyles = { cssText: card.style.cssText, revealClass: card.classList.contains('reveal') };
       activeCard = card;
+
+      // Remove reveal transform (it creates a containing block that traps fixed positioning)
+      card.classList.remove('reveal', 'visible');
 
       // Pin the card in its current viewport position using fixed
       card.style.top = rect.top + 'px';
