@@ -127,6 +127,13 @@ body.modal-open {
   overflow: hidden;
 }
 
+/* --- Intake Modal Open State --- */
+#intake-modal.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
 /* --- Custom scrollbar --- */
 ::-webkit-scrollbar {
   width: 6px;

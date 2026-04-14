@@ -208,18 +208,17 @@
             <a href="video-marketing.html#video" class="block px-5 py-3 font-label text-stone-400 hover:text-primary hover:bg-primary/5 text-xs tracking-widest uppercase transition-all duration-300">Video</a>
             <a href="video-marketing.html#ads" class="block px-5 py-3 font-label text-stone-400 hover:text-primary hover:bg-primary/5 text-xs tracking-widest uppercase transition-all duration-300">Ads</a>
             <a href="video-marketing.html#management" class="block px-5 py-3 font-label text-primary hover:text-primary hover:bg-primary/5 text-xs tracking-widest uppercase transition-all duration-300">Management</a>
+            <a href="index.html#work" class="block px-5 py-3 font-label text-stone-400 hover:text-primary hover:bg-primary/5 text-xs tracking-widest uppercase transition-all duration-300">Portfolio</a>
           </div>
         </div>
       </div>
       <a class="font-label text-stone-400 hover:text-secondary transition-colors duration-500 text-xs tracking-widest uppercase whitespace-nowrap" href="live-production.html">Live Production Consulting</a>
-      <a class="font-label text-stone-500 hover:text-tertiary transition-colors duration-500 text-xs tracking-widest uppercase" href="index.html#work">Work</a>
-      <a class="font-label text-stone-500 hover:text-tertiary transition-colors duration-500 text-xs tracking-widest uppercase" href="index.html#contact">Contact</a>
     </div>
 
     <!-- CTA Button -->
-    <a href="index.html#contact" class="hidden md:block font-label bg-tertiary text-on-primary px-6 py-3 font-bold tracking-widest text-xs uppercase hover:scale-95 active:scale-90 transition-all duration-400 bloom-hover-cream">
+    <button type="button" data-open-intake data-intake-service="Marketing Strategy" class="hidden md:block font-label bg-tertiary text-on-primary px-6 py-3 font-bold tracking-widest text-xs uppercase hover:scale-95 active:scale-90 transition-all duration-400 bloom-hover-cream">
       START PROJECT
-    </a>
+    </button>
 
     <!-- Mobile Hamburger -->
     <button id="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2" aria-label="Toggle menu">
@@ -234,10 +233,9 @@
       <a href="video-marketing.html#video" class="font-label text-sm uppercase tracking-[0.25em] text-stone-300 hover:text-primary transition-colors">Video</a>
       <a href="video-marketing.html#ads" class="font-label text-sm uppercase tracking-[0.25em] text-stone-300 hover:text-primary transition-colors">Ads</a>
       <a href="video-marketing.html#management" class="font-label text-sm uppercase tracking-[0.25em] text-primary transition-colors">Management</a>
+      <a href="index.html#work" class="font-label text-sm uppercase tracking-[0.25em] text-stone-300 hover:text-primary transition-colors">Portfolio</a>
       <a href="live-production.html" class="font-anton text-3xl md:text-4xl uppercase text-stone-200 hover:text-secondary transition-colors mt-4">Live Production Consulting</a>
-      <a href="index.html#work" class="font-anton text-3xl md:text-4xl uppercase text-stone-200 hover:text-tertiary transition-colors mt-4">Work</a>
-      <a href="index.html#contact" class="font-anton text-3xl md:text-4xl uppercase text-stone-200 hover:text-tertiary transition-colors">Contact</a>
-      <a href="index.html#contact" class="mt-4 px-10 py-4 bg-tertiary text-on-primary font-label font-bold text-sm tracking-widest uppercase">Start Project</a>
+      <button type="button" data-open-intake data-intake-service="Marketing Strategy" class="mt-4 px-10 py-4 bg-tertiary text-on-primary font-label font-bold text-sm tracking-widest uppercase">Start Project</button>
     </div>
   </nav>
 
@@ -462,10 +460,10 @@
       <p class="text-stone-400 text-lg md:text-xl mb-12 max-w-lg mx-auto">
         Tell us about the business. We'll tell you what it takes to move.
       </p>
-      <a href="mailto:hello@bigsplashvideo.com?subject=Marketing%20Strategy%20Inquiry" class="group inline-flex items-center gap-4 bg-tertiary text-on-primary px-12 py-6 font-anton text-2xl tracking-tight transition-all duration-500 bloom-hover-cream">
+      <button type="button" data-open-intake data-intake-service="Marketing Strategy" class="group inline-flex items-center gap-4 bg-tertiary text-on-primary px-12 py-6 font-anton text-2xl tracking-tight transition-all duration-500 bloom-hover-cream">
         START THE CONVERSATION
         <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-300">arrow_forward</span>
-      </a>
+      </button>
       <p class="mt-8 font-label text-xs tracking-widest uppercase text-stone-600">hello@bigsplashvideo.com</p>
     </div>
   </section>
@@ -534,6 +532,8 @@
 
   <!-- ========== SCRIPTS ========== -->
   <script src="js/animations.js"></script>
+  <script src="js/intake.js"></script>
+  <script src="js/easter-eggs.js"></script>
 
 </body>
 </html>
